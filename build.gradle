@@ -17,6 +17,14 @@ application {
 	mainClass = 'ch.bbw.m450.tictactoe.TicTacToeMain'
 }
 
+jar {
+	manifest {
+		attributes(
+			'Main-Class': application.mainClass.get()
+		)
+	}
+}
+
 dependencies {
 	testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
 	testImplementation 'org.assertj:assertj-core:3.26.3'
