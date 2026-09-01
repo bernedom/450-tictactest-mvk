@@ -1,0 +1,16 @@
+{
+    "name": "tictactoe-devcontainer",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "vscjava.vscode-java-pack",
+                "eamodio.gitlens",
+                "hbenl.vscode-test-explorer",
+                "vscjava.vscode-gradle"
+            ]
+        }
+    }
+}
