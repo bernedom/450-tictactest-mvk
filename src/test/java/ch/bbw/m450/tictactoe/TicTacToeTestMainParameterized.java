@@ -14,8 +14,10 @@ import org.junit.jupiter.params.provider.ValueSource;
 import ch.bbw.m450.tictactoe.TicTacToePlayer.Stone;
 import ch.bbw.m450.tictactoe.players.GreedyPlayer;
 
+// Collection of parameterized examples for core game rules and greedy move logic.
 class TicTacToeTestMainParameterized {
 
+    // Smallest possible ValueSource example: one board where CIRCLE clearly wins.
     @ParameterizedTest(name = "board={0} -> isWin(CIRCLE)=true")
     @ValueSource(strings = { "OOO______" })
     void isWinIsTrueForCircle(String boardLayout) {
@@ -24,6 +26,7 @@ class TicTacToeTestMainParameterized {
         assertTrue(TicTacToeMain.isWin(board, Stone.CIRCLE));
     }
 
+    // Simple data table with both positive and negative win checks.
     @ParameterizedTest(name = "board={0}, color={1} -> isWin={2}")
     @CsvSource({
             "XXX______, CROSS, true",
