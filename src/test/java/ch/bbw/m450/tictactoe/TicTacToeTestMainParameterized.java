@@ -1,17 +1,41 @@
 package ch.bbw.m450.tictactoe;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.stream.Stream;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import ch.bbw.m450.tictactoe.TicTacToePlayer.Stone;
 import ch.bbw.m450.tictactoe.players.GreedyPlayer;
 
 class TicTacToeTestMainParameterized {
+
+    @ParameterizedTest(name = "board={0} -> isWin(CIRCLE)=true")
+    @ValueSource(strings = { "OOO______" })
+    void isWinIsTrueForCircle(String boardLayout) {
+        Stone[] board = parseBoard(boardLayout);
+
+        assertTrue(TicTacToeMain.isWin(board, Stone.CIRCLE));
+    }
+
+    @ParameterizedTest(name = "board={0}, color={1} -> isWin={2}")
+    @CsvSource({
+            "XXX______, CROSS, true",
+            "OOO______, CIRCLE, true",
+            "XOXOOXXXO, CROSS, false",
+            "_________, CIRCLE, false"
+    })
+    void isWinWorksForSimpleBoards(String boardLayout, Stone color, boolean expectedWin) {
+        Stone[] board = parseBoard(boardLayout);
+
+        assertEquals(expectedWin, TicTacToeMain.isWin(board, color));
+    }
 
     // Each row from greedyMoveCases provides: board layout, color to play, expected
     // chosen index.
