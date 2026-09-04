@@ -11,6 +11,9 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      packages: read
     container:
       image: ghcr.io/bernedom/tictactest:latest
       credentials:
