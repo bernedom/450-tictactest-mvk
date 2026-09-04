@@ -4,6 +4,7 @@ on:
   push:
   pull_request:
 
+# Keep this job on the hosted runner; pulling a private GHCR job container can fail with "denied".
 jobs:
   build:
     runs-on: ubuntu-24.04
