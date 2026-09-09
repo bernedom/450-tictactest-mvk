@@ -8,6 +8,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-24.04
+    outputs:
+      sha_short: ${{ steps.vars.outputs.sha_short }}
     permissions:
       packages: write
     steps:
@@ -37,3 +39,41 @@ jobs:
           tags: |
             ghcr.io/bernedom/tictactest:latest
             ghcr.io/bernedom/tictactest:${{ steps.vars.outputs.sha_short }}
+
+  create-update-pr:
+    runs-on: ubuntu-24.04
+    needs: build
+    if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Update CI and devcontainer image references
+        env:
+          SHA_SHORT: ${{ needs.build.outputs.sha_short }}
+        run: |
+          set -euo pipefail
+
+          sed -i -E "s#(image: )ghcr.io/bernedom/tictactest:[^[:space:]]+#\\1ghcr.io/bernedom/tictactest:${SHA_SHORT}#" .github/workflows/ci.yml
+
+          jq --arg image "ghcr.io/bernedom/tictactest:${SHA_SHORT}" \
+            '. + {image: $image} | del(.build)' \
+            .devcontainer/devcontainer.json > .devcontainer/devcontainer.json.tmp
+          mv .devcontainer/devcontainer.json.tmp .devcontainer/devcontainer.json
+
+      - name: Create pull request for container reference updates
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: update container references to ${{ needs.build.outputs.sha_short }}"
+          branch: "chore/update-container-${{ needs.build.outputs.sha_short }}"
+          delete-branch: true
+          title: "chore: update container references to ${{ needs.build.outputs.sha_short }}"
+          body: |
+            Updates container references to the newly built image tag.
+
+            - Updates CI container image in `.github/workflows/ci.yml`
+            - Updates `.devcontainer/devcontainer.json` to use `ghcr.io/bernedom/tictactest:${{ needs.build.outputs.sha_short }}`
