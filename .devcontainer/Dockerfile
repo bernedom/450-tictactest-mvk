@@ -14,6 +14,7 @@ RUN apt-get update \
 ENV JAVA_HOME=/opt/java/openjdk
 ENV PATH="${JAVA_HOME}/bin:${PATH}"
 
+
 RUN if id -u ubuntu >/dev/null 2>&1; then usermod -l builder ubuntu; fi
 RUN if id -u builder >/dev/null 2>&1; then groupmod -n builder ubuntu; fi
 RUN if id -u builder >/dev/null 2>&1; then usermod -d /home/builder -m builder; fi
