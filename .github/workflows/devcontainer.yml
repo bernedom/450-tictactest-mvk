@@ -4,10 +4,6 @@ on:
   push:
     paths:
       - '.devcontainer/Dockerfile'
-    branches:
-      - 'devcontainer/*'
-
-      
 
 jobs:
   build:
