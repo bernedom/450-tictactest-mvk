@@ -2,10 +2,10 @@ name: Devcontainer
 
 on:
   push:
-    # paths:
-    #   - '.devcontainer/Dockerfile'
-    # branches:
-    #   - 'devcontainer/*'
+    paths:
+      - '.devcontainer/Dockerfile'
+    branches:
+      - 'devcontainer/*'
 
       
 
