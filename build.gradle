@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'application'
 	id 'jacoco'
+	id 'info.solidsoft.pitest' version '1.19.0'
 }
 
 repositories {
@@ -30,6 +31,7 @@ dependencies {
 	testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
 	testImplementation 'org.assertj:assertj-core:3.26.3'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	pitest 'org.pitest:pitest-junit5-plugin:1.2.1'
 }
 
 jacoco {
@@ -47,5 +49,14 @@ jacocoTestReport {
 		xml.required = true
 		html.required = true
 		csv.required = true
+}
+
+pitest {
+	junit5PluginVersion = '1.2.1'
+	targetClasses = ['ch.bbw.m450.tictactoe.*']
+	targetTests = ['ch.bbw.m450.tictactoe.*']
+	threads = 4
+	outputFormats = ['HTML']
+	timestampedReports = false
 	}
 }
