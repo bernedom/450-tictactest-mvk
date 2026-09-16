@@ -7,18 +7,30 @@ import ch.bbw.m450.tictactoe.players.GreedyPlayer;
 import ch.bbw.m450.tictactoe.players.HumanPlayer;
 
 /**
- * A small tic-tac-toe board. Initially with a human and a primitive but valid computer player.
+ * A small tic-tac-toe board. Initially with a human and a primitive but valid
+ * computer player.
  */
 public class TicTacToeMain {
 
 	public static final int BOARD_SIZE = 9;
+
+	public static void unusedFunction(int unusedParameter) {
+		// This function is intentionally left unused to trigger a worse coverage
+		if (unusedParameter > 0) {
+			System.out.println("This is an unused function.");
+		} else {
+			System.err.println("This is an unused function.");
+
+		}
+
+	}
 
 	public static void main(String[] args) {
 		play(new HumanPlayer(), new GreedyPlayer());
 	}
 
 	/**
-	 * @param b TicTacToe-board to check for a winner
+	 * @param b     TicTacToe-board to check for a winner
 	 * @param color either X or O
 	 * @return true if the colorToPlay wins the current board (has three in a line)
 	 */
@@ -61,12 +73,12 @@ public class TicTacToeMain {
 	public static Stone play(TicTacToePlayer xPlayer, TicTacToePlayer oPlayer) {
 		// the board is organized as a 1-dimensional matrix of size 3x3=9
 		// to get the index for position at row r and colum c, calculate index=r*3+c
-		//     0 | 1 | 2
-		//    ---+---+---
-		//     3 | 4 | 5
-		//    ---+---+---
-		//     6 | 7 | 8
-		if(xPlayer == oPlayer) {
+		// 0 | 1 | 2
+		// ---+---+---
+		// 3 | 4 | 5
+		// ---+---+---
+		// 6 | 7 | 8
+		if (xPlayer == oPlayer) {
 			throw new IllegalArgumentException("players must differ");
 		}
 		var board = new Stone[BOARD_SIZE]; // all null -> empty
