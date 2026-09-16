@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1789544475848,
+  "lastUpdate": 1789544615768,
   "repoUrl": "https://github.com/bernedom/450-tictactest-mvk",
   "entries": {
     "Benchmark": [
@@ -169,6 +169,40 @@ window.BENCHMARK_DATA = {
           {
             "name": "Branch coverage",
             "value": 33.75,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "dominik.berner@gmail.com",
+            "name": "Dominik Berner",
+            "username": "bernedom"
+          },
+          "committer": {
+            "email": "dominik.berner@gmail.com",
+            "name": "Dominik Berner",
+            "username": "bernedom"
+          },
+          "distinct": true,
+          "id": "f300f12579f1c562af3f3ac04d62d310c2d8ad3d",
+          "message": "Revert \"Remove one set of tests\"\n\nThis reverts commit 8b765763f4420d5ea38931ff0e42b4076bbb7f46.",
+          "timestamp": "2026-09-16T09:40:52+02:00",
+          "tree_id": "8b91be10fe7724a69427dcfd984a0d0bbff90dbd",
+          "url": "https://github.com/bernedom/450-tictactest-mvk/commit/f300f12579f1c562af3f3ac04d62d310c2d8ad3d"
+        },
+        "date": 1789544614312,
+        "tool": "customBiggerIsBetter",
+        "benches": [
+          {
+            "name": "Instruction coverage",
+            "value": 51.94805194805194,
+            "unit": "%"
+          },
+          {
+            "name": "Branch coverage",
+            "value": 43.75,
             "unit": "%"
           }
         ]
