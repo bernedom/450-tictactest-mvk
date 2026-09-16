@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1789543762834,
+  "lastUpdate": 1789543842353,
   "repoUrl": "https://github.com/bernedom/450-tictactest-mvk",
   "entries": {
     "Benchmark": [
@@ -57,6 +57,40 @@ window.BENCHMARK_DATA = {
           "url": "https://github.com/bernedom/450-tictactest-mvk/commit/c9f2f756824c3fac008d6dc008e8d3601f217031"
         },
         "date": 1789543762356,
+        "tool": "customBiggerIsBetter",
+        "benches": [
+          {
+            "name": "Instruction coverage",
+            "value": 53.333333333333336,
+            "unit": "%"
+          },
+          {
+            "name": "Branch coverage",
+            "value": 44.871794871794876,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "dominik.berner@gmail.com",
+            "name": "Dominik Berner",
+            "username": "bernedom"
+          },
+          "committer": {
+            "email": "dominik.berner@gmail.com",
+            "name": "Dominik Berner",
+            "username": "bernedom"
+          },
+          "distinct": true,
+          "id": "61695eb19f8717a62fd31200609fe63905e353fa",
+          "message": "Only build coverage on main",
+          "timestamp": "2026-09-16T09:28:56+02:00",
+          "tree_id": "49a27d69bdbc6fbbca84ef8a18184e5dba440a95",
+          "url": "https://github.com/bernedom/450-tictactest-mvk/commit/61695eb19f8717a62fd31200609fe63905e353fa"
+        },
+        "date": 1789543841885,
         "tool": "customBiggerIsBetter",
         "benches": [
           {
