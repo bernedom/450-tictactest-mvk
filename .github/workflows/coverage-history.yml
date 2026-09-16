@@ -2,6 +2,8 @@ name: Coverage History
 
 on:
   push:
+    branches:
+      - main
   workflow_dispatch:
 
 concurrency:
