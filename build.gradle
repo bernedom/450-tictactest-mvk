@@ -30,6 +30,7 @@ jar {
 dependencies {
 	testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
 	testImplementation 'org.assertj:assertj-core:3.26.3'
+	testImplementation 'org.junit-pioneer:junit-pioneer:2.3.0'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	pitest 'org.pitest:pitest-junit5-plugin:1.2.1'
 }
@@ -49,6 +50,7 @@ jacocoTestReport {
 		xml.required = true
 		html.required = true
 		csv.required = true
+	}
 }
 
 pitest {
@@ -58,5 +60,4 @@ pitest {
 	threads = 4
 	outputFormats = ['HTML']
 	timestampedReports = false
-	}
 }
