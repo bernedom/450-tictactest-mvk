@@ -13,7 +13,10 @@
       in
       {
         devShells.default = pkgs.mkShell {
-          packages = [ pkgs.opentofu ];
+          packages = [
+            pkgs.opentofu
+            pkgs.awscli2
+          ];
         };
       });
 }
