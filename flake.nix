@@ -16,6 +16,7 @@
           packages = [
             pkgs.opentofu
             pkgs.awscli2
+            pkgs.ttyd
           ];
         };
       });
