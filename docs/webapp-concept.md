@@ -267,3 +267,33 @@ Still open:
 - ttyd man page (`-W`/`--writable`): https://www.mankier.com/1/ttyd
 - ttyd: https://github.com/tsl0922/ttyd
 - websocketd: https://github.com/joewalnes/websocketd
+
+## 8. Running the stack locally (iteration 1)
+
+Prerequisites: `ttyd`, `java` (25), `python3`, `unzip`, and `gh` for the download. The nix flake provides ttyd.
+
+1. Download the jar from a GitHub release into `release/`. Don't build it locally. The folder is git-ignored and must contain exactly one jar.
+   ```bash
+   gh release download <tag> --pattern '*.jar' --dir release
+   ```
+2. Start the stack:
+   ```bash
+   scripts/run-local.sh
+   ```
+   This starts two servers, both bound to localhost only:
+   - **ttyd** on `:7681`. It runs `java -jar release/<jar>`: writable, at most 4 clients, never a shell.
+   - **python3 http.server** on `:8000`. It serves `frontend/` plus a generated `version.txt`, staged in `build/local-web/`.
+3. Open <http://localhost:8000/> and play. Enter fields as 0–8. When a game ends, press Enter in the terminal to start a new one.
+4. Check the running version: `curl http://localhost:8000/version.txt`.
+5. Stop with `Ctrl+C`. If one server exits, the other is stopped too.
+
+Configuration through environment variables:
+
+| Variable | Default | Meaning |
+|----------|---------|---------|
+| `JAR_DIR` | `release/` | Folder containing the released jar |
+| `TTYD_PORT` | `7681` | Port of the web console |
+| `WEB_PORT` | `8000` | Port of the frontend |
+| `MAX_CLIENTS` | `4` | Max. concurrent games (one JVM each) |
+
+If you change `TTYD_PORT`, also change `consoleUrl` in `frontend/config.js`. That file is the only per-environment file. On the remote host, nginx uses its own copy.

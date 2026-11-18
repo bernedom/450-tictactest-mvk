@@ -20,3 +20,6 @@ yarn-error.log*
 bin/
 
 .direnv/
+
+# released artifacts downloaded for local runs
+release/

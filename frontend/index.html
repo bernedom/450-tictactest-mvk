@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TicTacTest</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 0 auto; max-width: 900px; padding: 1rem; background: #f4f4f4; color: #222; }
+    h1 { margin-bottom: .25rem; }
+    pre.board { display: inline-block; background: #fff; padding: .5rem 1rem; border: 1px solid #ccc; }
+    iframe { width: 100%; height: 480px; border: 1px solid #333; background: #000; }
+    footer { margin-top: 1rem; font-size: .9rem; color: #555; }
+  </style>
+</head>
+<body>
+  <h1>TicTacTest</h1>
+  <p>Sie spielen <strong>X</strong> und beginnen, der Computer spielt <strong>O</strong>.
+     Geben Sie die Nummer des Feldes ein und drücken Sie <kbd>Enter</kbd>:</p>
+  <pre class="board"> 0 | 1 | 2
+---+---+---
+ 3 | 4 | 5
+---+---+---
+ 6 | 7 | 8</pre>
+  <p>Am Spielende (oder bei einer ungültigen Eingabe) wird die Verbindung beendet.
+     Mit <kbd>Enter</kbd> im Terminal starten Sie ein neues Spiel.</p>
+
+  <iframe id="console" title="TicTacTest Web-Konsole"></iframe>
+
+  <footer>
+    Backend: <span id="backend-version">…</span> ·
+    Frontend: <span id="frontend-version">…</span>
+  </footer>
+
+  <script src="config.js"></script>
+  <script>
+    const cfg = window.TICTACTEST_CONFIG || {};
+
+    document.getElementById("console").src = cfg.consoleUrl;
+
+    async function showVersion(url, elementId) {
+      const el = document.getElementById(elementId);
+      try {
+        const res = await fetch(url, { cache: "no-store" });
+        if (!res.ok) throw new Error(res.status);
+        el.textContent = (await res.text()).trim();
+      } catch (e) {
+        el.textContent = "unbekannt";
+        console.warn("Version from", url, "not available:", e);
+      }
+    }
+
+    showVersion(cfg.backendVersionUrl, "backend-version");
+    // written into the frontend archive by the release process (Teil 4)
+    showVersion("frontend-version.txt", "frontend-version");
+  </script>
+</body>
+</html>
